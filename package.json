@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {},
   "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tborychowski/unifi-event-monitor.git"
+  },
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@oznu/ws-connect": "^0.0.4",
