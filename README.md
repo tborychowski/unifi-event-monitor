@@ -18,7 +18,7 @@ PASSWORD=<password>
 3. Create `docker-compose.yml` file:
 ```yml
 ---
-version: "3"
+version: "3.7"
 services:
   unifi-event-monitor:
     container_name: unifi-event-monitor
