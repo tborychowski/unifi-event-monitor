@@ -108,8 +108,8 @@ module.exports = class UnifiWatcher extends EventEmitter {
 		return this._ensureLoggedIn()
 			.then(() => this.rp.get(`${this.controller.href}api/s/${this.opts.site}/stat/user/${mac}`, { json: true }))
 			.then(data => {
-				if (!data || !data.data || !data.data.length) return '';
-				return data.data[0].name || data.data[0].hostname || '';
+				if (!data || !data.data || !data.data.length) return mac;
+				return data.data[0].name || data.data[0].hostname || mac;
 			})
 			.catch(() => {});
 	}
@@ -119,8 +119,8 @@ module.exports = class UnifiWatcher extends EventEmitter {
 			._ensureLoggedIn()
 			.then(() => this.rp.get(`${this.controller.href}api/s/${this.opts.site}/stat/device/${mac}`, { json: true }))
 			.then(data => {
-				if (!data || !data.data || !data.data.length) return '';
-				return data.data[0].name || '';
+				if (!data || !data.data || !data.data.length) return mac;
+				return data.data[0].name || mac;
 			})
 			.catch(() => {});
 	}
