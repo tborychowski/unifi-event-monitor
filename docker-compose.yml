@@ -4,5 +4,11 @@ services:
     container_name: unifi-event-monitor
     image: tborychowski/unifi-event-monitor
     restart: unless-stopped
-    env_file:
-      - ./.env
+	environment:
+      - HOST=https://<controller IP>:8443
+      - USERNAME=<controller username>
+	  - PASSWORD=<controller password>
+    volumes:
+      - type: bind
+        source: ./.apprise
+        target: /unifi-event-monitor/.apprise

@@ -67,22 +67,19 @@ module.exports = class UnifiWatcher extends EventEmitter {
 		});
 	}
 
-
 	async _reformat (data) {
 		const params = {};
 		if (data.ap) params.ap = await this.getAp(data.ap);
 		if (data.ap_from) params.ap_from = await this.getAp(data.ap_from);
 		if (data.ap_to) params.ap_to = await this.getAp(data.ap_to);
-
-		params.userMac = data.guest || data.user;
-		params.userType = data.guest ? 'Guest' : 'User';
-		params.client = await this.getClient(params.userMac);
-
+		if (data.guest) params.guest = await this.getClient(data.guest);
+		else if (data.user) params.user = await this.getClient(data.user);
 		data.msg = data.msg
-			.replace(`${params.userType}[${params.userMac}]`, `*${params.client}*`)
 			.replace(`AP[${data.ap}]`, `*${params.ap}*`)
 			.replace(`AP[${data.ap_from}]`, `*${params.ap_from}*`)
-			.replace(`AP[${data.ap_to}]`, `*${params.ap_to}*`);
+			.replace(`AP[${data.ap_to}]`, `*${params.ap_to}*`)
+			.replace(`Guest[${data.guest}]`, `*${params.guest}*`)
+			.replace(`User[${data.user}]`, `*${params.user}*`);
 		return data;
 	}
 
@@ -104,21 +101,27 @@ module.exports = class UnifiWatcher extends EventEmitter {
 	getClients () {
 		return this._ensureLoggedIn()
 			.then(() => this.rp.get(`${this.controller.href}api/s/${this.opts.site}/stat/sta`, { json: true }))
-			.catch(e => console.log(e));
+			.catch(() => {});
 	}
 
 	getClient (mac) {
 		return this._ensureLoggedIn()
 			.then(() => this.rp.get(`${this.controller.href}api/s/${this.opts.site}/stat/user/${mac}`, { json: true }))
-			.then(data => data.data[0].name || data.data[0].hostname)
-			.catch(e => console.log(e));
+			.then(data => {
+				if (!data || !data.data || !data.data.length) return '';
+				return data.data[0].name || data.data[0].hostname || '';
+			})
+			.catch(() => {});
 	}
 
 	getAp (mac) {
 		return this
 			._ensureLoggedIn()
 			.then(() => this.rp.get(`${this.controller.href}api/s/${this.opts.site}/stat/device/${mac}`, { json: true }))
-			.then(data => data.data[0].name)
-			.catch(e => console.log(e));
+			.then(data => {
+				if (!data || !data.data || !data.data.length) return '';
+				return data.data[0].name || '';
+			})
+			.catch(() => {});
 	}
 };
