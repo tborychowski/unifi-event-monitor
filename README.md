@@ -3,12 +3,14 @@ Monitors Unifi Controller events and sends them as notification via [apprise](ht
 
 ## Setup
 1. Create `.apprise` file with your [apprise config](https://github.com/caronc/apprise#popular-notification-services), e.g.:
+
 ```
 slack://<token1>/<token2>/<token3>
 mailtos://<userid>:<pass>@<domain.com>
 ```
 
 2. Create `.env` file with the Unifi Controller credentials:
+
 ```
 HOST=https://<controllerIP>:8443
 USERNAME=<username>
@@ -16,7 +18,8 @@ PASSWORD=<password>
 ```
 
 3. Create `docker-compose.yml` file:
-```yml
+
+```yaml
 ---
 version: "3.7"
 services:
@@ -34,6 +37,7 @@ services:
 
 
 4. Run:
+
 ```sh
 docker run -d --rm --env-file=./.env /
   --mount "type=bind,src=/absolute/path/to/.apprise,dst=/unifi-event-monitor/.apprise" \
