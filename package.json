@@ -1,0 +1,16 @@
+{
+  "name": "unifi-event-monitor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+	"license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@oznu/ws-connect": "^0.0.4",
+    "dotenv": "^8.2.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8"
+  }
+}
