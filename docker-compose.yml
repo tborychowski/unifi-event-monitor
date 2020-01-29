@@ -1,0 +1,8 @@
+version: "3"
+services:
+  unifi-event-monitor:
+    container_name: unifi-event-monitor
+    image: tborychowski/unifi-event-monitor
+    restart: unless-stopped
+    env_file:
+      - ./.env

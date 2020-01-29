@@ -106,7 +106,8 @@ module.exports = class UnifiEvents extends EventEmitter {
 			.then(() => {
 				return this.rp
 					.get(`${this.controller.href}api/s/${this.opts.site}/stat/sta`, { json: true });
-			});
+			})
+			.catch(e => console.log(e));
 	}
 
 	getClient (mac) {
@@ -118,7 +119,8 @@ module.exports = class UnifiEvents extends EventEmitter {
 						const {ip, name, hostname, is_wired } = data.data[0];
 						return {ip, name, hostname, is_wired };
 					});
-			});
+			})
+			.catch(e => console.log(e));
 	}
 
 	getAp (mac) {
@@ -131,7 +133,8 @@ module.exports = class UnifiEvents extends EventEmitter {
 						const {name, ip} = data.data[0];
 						return {name, ip};
 					});
-			});
+			})
+			.catch(e => console.log(e));
 	}
 
 	// getSites () {
