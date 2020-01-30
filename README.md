@@ -4,7 +4,7 @@ Listens for events from Unifi controller and pushes them as notifications to [ap
 
 # Get started
 
-## [Apprise config](https://github.com/caronc/apprise#popular-notification-services)
+#### [Apprise config](https://github.com/caronc/apprise#popular-notification-services)
 
 Create `.apprise` file with your channels, e.g.:
 
@@ -15,7 +15,7 @@ mailtos://<userid>:<pass>@<domain.com>
 
 
 
-## Unifi Controller credentials
+#### Unifi Controller credentials
 
 Create `.env` file with the following:
 
