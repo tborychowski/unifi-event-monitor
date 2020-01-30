@@ -1,7 +1,7 @@
 # Unifi Controller Event Monitor & Notifier
-Monitors Unifi Controller events and sends them as notification via [apprise](https://github.com/caronc/apprise).
+[Unifi Event Monitor](https://github.com/tborychowski/unifi-event-monitor) listens for events from Unifi controller and pushes them as notifications to [apprise](https://github.com/caronc/apprise).
 
-## Setup
+## Setup (using [docker image](https://hub.docker.com/r/tborychowski/unifi-event-monitor))
 1. Create `.apprise` file with your [apprise config](https://github.com/caronc/apprise#popular-notification-services), e.g.:
 
 ```
