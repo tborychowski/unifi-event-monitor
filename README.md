@@ -2,15 +2,22 @@
 Listens for events from Unifi controller and pushes them as notifications to [apprise](https://github.com/caronc/apprise).
 
 
-## Setup using [docker image](https://hub.docker.com/r/tborychowski/unifi-event-monitor)
-1. Create `.apprise` file with your [apprise config](https://github.com/caronc/apprise#popular-notification-services), e.g.:
+# Get started
+
+## [Apprise config](https://github.com/caronc/apprise#popular-notification-services)
+
+Create `.apprise` file with your channels, e.g.:
 
 ```
 slack://<token1>/<token2>/<token3>
 mailtos://<userid>:<pass>@<domain.com>
 ```
 
-2. Create `.env` file with the Unifi Controller credentials:
+
+
+## Unifi Controller credentials
+
+Create `.env` file with the following:
 
 ```
 HOST=https://<controllerIP>:8443
@@ -18,7 +25,8 @@ USERNAME=<username>
 PASSWORD=<password>
 ```
 
-3. Create `docker-compose.yml` file:
+## Setup using [docker image](https://hub.docker.com/r/tborychowski/unifi-event-monitor)
+#### Create `docker-compose.yml` file:
 
 ```yaml
 ---
@@ -37,7 +45,13 @@ services:
 ```
 
 
-4. Run:
+#### Run:
+
+```sh
+docker-compose up -d
+```
+
+#### Alternatively, you can run:
 
 ```sh
 docker run -d --rm --env-file=./.env /
@@ -45,12 +59,15 @@ docker run -d --rm --env-file=./.env /
   tborychowski/unifi-event-monitor
 ```
 
-or with `docker-compose`:
+## Setup locally (with nodejs)
+
 ```sh
-docker-compose up -d
+git clone https://github.com/tborychowski/unifi-event-monitor.git
+cd unifi-event-monitor
+npm ci
+node index.js
 ```
 
 
-
-## Credit
+# Credit
 I used some code from: https://github.com/oznu/unifi-events
