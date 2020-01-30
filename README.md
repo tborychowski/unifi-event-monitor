@@ -4,7 +4,7 @@ Listens for events from Unifi controller and pushes them as notifications to [ap
 
 # Get started
 
-#### [Apprise config](https://github.com/caronc/apprise#popular-notification-services)
+#### 1. [Apprise config](https://github.com/caronc/apprise#popular-notification-services)
 
 Create `.apprise` file with your channels, e.g.:
 
@@ -15,7 +15,7 @@ mailtos://<userid>:<pass>@<domain.com>
 
 
 
-#### Unifi Controller credentials
+#### 2. Unifi Controller credentials
 
 Create `.env` file with the following:
 
@@ -26,7 +26,7 @@ PASSWORD=<password>
 ```
 
 ## Setup using [docker image](https://hub.docker.com/r/tborychowski/unifi-event-monitor)
-#### Create `docker-compose.yml` file:
+#### 1. Create `docker-compose.yml` file:
 
 ```yaml
 ---
@@ -45,13 +45,13 @@ services:
 ```
 
 
-#### Run:
+#### 2a. Run:
 
 ```sh
 docker-compose up -d
 ```
 
-#### Alternatively, you can run:
+#### 2b. Alternatively, you can run:
 
 ```sh
 docker run -d --rm --env-file=./.env /
