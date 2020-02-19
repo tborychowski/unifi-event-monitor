@@ -39,9 +39,8 @@ services:
     env_file:
       - ./.env
     volumes:
-      - type: bind
-        source: ./.apprise
-        target: /unifi-event-monitor/.apprise
+      - ./.apprise:/app/.apprise
+      - ./blacklist.txt:/app/blacklist.txt
 ```
 
 
@@ -54,10 +53,25 @@ docker-compose up -d
 #### 2b. Alternatively, you can run:
 
 ```sh
-docker run -d --rm --env-file=./.env /
-  --mount "type=bind,src=/absolute/path/to/.apprise,dst=/unifi-event-monitor/.apprise" \
-  tborychowski/unifi-event-monitor
+docker run -d --rm --env-file=./.env \
+  --mount "type=bind,src=/absolute/path/to/.apprise,dst=/app/.apprise" \
+  --mount "type=bind,src=/absolute/path/to/blacklist.txt,dst=/app/blacklist.txt" \
+  tborychowski/unifi-event-monitor:latest
 ```
+
+## Filtering events
+By default the app listens to all events and forwards the messages as notifications.
+It is possible to filter out some of the messages.
+- Create `blacklist.txt` file (in the same folder as the `.apprise`)
+- Add text of a message that you don't want to be pushed to your selected notification platform
+- You can have multiple filters, but keep 1 filter per line, e.g.
+  ```
+  my laptop disconnected from
+  my laptop has connected to
+  ```
+- This file is re-read before every event, so there's no need to restart the app after changing the file.
+
+
 
 ## Setup locally (with nodejs)
 

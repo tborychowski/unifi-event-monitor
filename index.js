@@ -17,7 +17,7 @@ function log (text = '') {
 
 function filter (text = '') {
 	if (fs.existsSync(BLACKLIST)) {
-		text = text.replace(/\*/g, '').trim().toLowerCase();
+		const msg = text.replace(/\*/g, '').trim().toLowerCase();
 		const list = fs.readFileSync(BLACKLIST, 'utf8');
 		const lines = list
 			.trim()
@@ -27,7 +27,7 @@ function filter (text = '') {
 			.map(l => l.trim().toLowerCase());
 
 		for (let l of lines) {
-			if (text.includes(l)) return;
+			if (msg.includes(l)) return;
 		}
 	}
 	return text;
