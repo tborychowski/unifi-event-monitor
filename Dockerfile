@@ -1,10 +1,13 @@
 FROM node:alpine
 RUN apk update && \
-    apk add git && \
     apk add python && \
     apk add py-pip && \
-    pip install apprise && \
-    git clone https://github.com/tborychowski/unifi-event-monitor
-WORKDIR /unifi-event-monitor
-RUN npm i
+    pip install apprise
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
 CMD ["node", "index.js"]

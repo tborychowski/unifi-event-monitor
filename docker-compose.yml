@@ -3,11 +3,10 @@ version: "3.7"
 services:
   unifi-event-monitor:
     container_name: unifi-event-monitor
-    image: tborychowski/unifi-event-monitor
+    image: tborychowski/unifi-event-monitor:1.1.0
     restart: unless-stopped
     env_file:
       - ./.env
     volumes:
-      - type: bind
-        source: ./.apprise
-        target: /unifi-event-monitor/.apprise
+      - ./.apprise:/app/.apprise
+      - ./blacklist.txt:/app/blacklist.txt

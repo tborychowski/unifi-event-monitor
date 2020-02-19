@@ -3,3 +3,5 @@ node_modules/
 .apprise
 .DS_Store
 *.log
+notes.md
+blacklist.txt
